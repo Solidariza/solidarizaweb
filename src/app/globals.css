@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --font-lato: "Lato";
+  --font-prata: "Prata";
+  --spacing-0.8: 0.15rem;
+  --font-poppins: "Poppins";
+  --color-gray-dark: #404040;
+  --color-blue-primary: #272343;
+  --color-blue-tertiary: #110970;
+  --color-blue-secondary: #231390;
+  --color-yellow-primary: #ffd803;
+  --color-blue-quaternary: #000050;
+  --background-image-fundo: url(/fundo.svg);
+}
