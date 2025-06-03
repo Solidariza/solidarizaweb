@@ -3,18 +3,20 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 interface NavigationButtonProps {
   length?: number;
+  visibleCards?: number;
   direction: "prev" | "next";
   setActiveIndex?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const NavigationButton: React.FC<NavigationButtonProps> = ({
+  length,
   direction,
   setActiveIndex,
-  length,
+  visibleCards = 5,
 }) => {
   const handleClick = () => {
     if (setActiveIndex && typeof length === "number") {
-      handleClickChange(setActiveIndex, direction, length);
+      handleClickChange(setActiveIndex, direction, length, visibleCards);
     }
   };
   return (

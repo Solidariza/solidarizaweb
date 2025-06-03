@@ -1,4 +1,4 @@
-export { cards } from "./cards";
+export { cards, cardsData, cardsLength } from "./cards";
 export {
   creators,
   fabio,

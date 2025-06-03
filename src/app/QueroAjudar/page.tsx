@@ -4,7 +4,10 @@ import { LocalCard } from "@/components";
 export default function QueroAjudar() {
   return (
     <main className="flex flex-col mt-24 items-center min-h-screen px-10">
-      <h1 className="text-center tracking-wide font-prata text-4xl text-gray-dark font-black">
+      <h1
+        className="w-full px-1 py-2 rounded-md bg-white text-center tracking-wide font-prata text-4xl text-gray-dark 
+        font-black shadow-md hover:shadow-2xl"
+      >
         Faça sua parte
       </h1>
 
@@ -27,7 +30,7 @@ export default function QueroAjudar() {
         </h2>
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex gap-6 justify-center items-center">
         <LocalCard
           src={LarSanto}
           imgUrl="/laridosos.svg"

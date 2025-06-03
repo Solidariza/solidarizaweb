@@ -23,11 +23,11 @@ export const LocalCard = ({
 }: LocalCardProps) => {
   return (
     <div className="flex flex-col gap-2 p-4 bg-white rounded-xs justify-center items-center">
-      <Image src={src} alt={title} className="w-70 h-70" />
+      <Image src={src} alt={title} className="w-64 h-64" />
       <h3 className="font-poppins font-semibold text-xl text-blue-primary">
         {title}
       </h3>
-      <h4 className="mx-2 h-auto text-xl text-justify font-lato">
+      <h4 className="mx-6 h-auto text-xl text-justify font-lato">
         {description}
       </h4>
       <h5 className="text-gray-dark/90 text-center font-poppins font-medium">

@@ -1,5 +1,7 @@
 export {
   cards,
+  cardsData,
+  cardsLength,
   creators,
   fabio,
   glawck,

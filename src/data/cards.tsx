@@ -62,3 +62,6 @@ export const cards = () => [
     href: "SobreNos",
   },
 ];
+
+export const cardsData = cards();
+export const cardsLength = cards().length;

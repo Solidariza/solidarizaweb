@@ -2,12 +2,23 @@ export const handleClickChange = (
   setActiveIndex: React.Dispatch<React.SetStateAction<number>>,
   direction: "next" | "prev",
   length: number,
+  visibleCards: number
 ) => {
-  setActiveIndex((prevIndex) => {
+  setActiveIndex((currentIndex) => {
     if (direction === "next") {
-      return (prevIndex + 1) % length;
+      // Se chegou ao final, volta para o início
+      if (currentIndex + visibleCards >= length) {
+        return 0;
+      }
+      // Senão, avança um card
+      return currentIndex + 1;
     } else {
-      return (prevIndex - 1 + length) % length;
+      // Se está no início, vai para o final
+      if (currentIndex <= 0) {
+        return Math.max(0, length - visibleCards);
+      }
+      // Senão, volta um card
+      return currentIndex - 1;
     }
   });
 };
