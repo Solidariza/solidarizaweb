@@ -66,6 +66,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
     twitter: {
       title: title,
       creator: team,
+      images: "./favicon.ico",
       description: description,
       card: "summary_large_image",
     },
@@ -76,6 +77,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
       siteName: siteName,
       determiner: "auto",
       countryName: "Brasil",
+      images: "./favicon.ico",
       description: description,
       phoneNumbers: phones as string[] | "+55 (43) 9 9828-0078",
       emails: emails as string[] | "solidarizaenterprise@gmail.com",
@@ -152,6 +154,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
     classification: "website",
     applicationName: "Solidariza",
     referrer: "origin-when-cross-origin",
+    metadataBase: new URL("https://solidarizaweb-cyan.vercel.app"),
     abstract: `Site desenvolvido com propósito a auxiliar idosos e quaisquer tipo de pessoas a se entreterem e ir em busca 
     de conhecimento e informação.`,
   };

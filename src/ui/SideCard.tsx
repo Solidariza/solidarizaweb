@@ -8,11 +8,21 @@ import { MdOutlineEmail } from "react-icons/md";
 
 interface SideCardProps {
   photoUrl: string;
+  blurPhotoUrl: string;
+  photoDescription: string;
+  blurPhotoDescription: string;
   creator: (typeof creators)[number];
   userInfos: userInfosEntry | undefined;
 }
 
-const SideCard = ({ creator, userInfos, photoUrl }: SideCardProps) => {
+const SideCard = ({
+  creator,
+  userInfos,
+  photoUrl,
+  blurPhotoUrl,
+  photoDescription,
+  blurPhotoDescription,
+}: SideCardProps) => {
   return (
     <div
       className="flex flex-col bg-white p-6 rounded-lg shadow-md w-full md:w-1/4 items-center hover:shadow-2xl 
@@ -22,8 +32,8 @@ const SideCard = ({ creator, userInfos, photoUrl }: SideCardProps) => {
         <Image
           fill
           src={`https:${photoUrl}`}
-          blurDataURL={`https:${photoUrl}`}
-          alt={userInfos?.fields.nameUser as string}
+          blurDataURL={`https:${blurPhotoUrl}`}
+          alt={photoDescription ?? blurPhotoDescription}
           className="object-cover rounded-lg shadow-lg mb-4 border-4 border-blue-quaternary"
         />
       </div>
@@ -37,20 +47,20 @@ const SideCard = ({ creator, userInfos, photoUrl }: SideCardProps) => {
       <div className="flex flex-col w-full mt-4 space-y-2 text-lg items-start text-blue-primary">
         <Link
           target="_blank"
-          href={userInfos?.fields.instaUser as string}
-          title={userInfos?.fields.instaUser as string}
           rel="noopener noreferrer"
           className="hover:underline text-nowrap"
+          href={userInfos?.fields.instaUser as string}
+          title={userInfos?.fields.instaUser as string}
         >
           <FaInstagram className="inline mr-1 mb-1" />
           <span>{getSlugToName(creator.slug)}</span>
         </Link>
         <Link
           target="_blank"
-          href={userInfos?.fields.faceUser as string}
-          title={userInfos?.fields.faceUser as string}
           rel="noopener noreferrer"
           className="hover:underline text-nowrap"
+          href={userInfos?.fields.faceUser as string}
+          title={userInfos?.fields.faceUser as string}
         >
           <FaFacebook className="inline mr-1 mb-1" />
           {getSlugToName(creator.slug)}
