@@ -1,4 +1,6 @@
 import { AboutUs } from "@/components";
+import { clientContentful } from "@/lib";
+import { userInfosEntry } from "@/types";
 import { findCreatorByName, getSlugToName } from "@/utils";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -27,5 +29,12 @@ export default async function PerfilPage({
   const { name } = await params;
   const creator = findCreatorByName(name);
   if (!creator) notFound();
-  return <AboutUs creator={creator} />;
+
+  const userInfos = (
+    await clientContentful.getEntries({ content_type: "sobreNs" })
+  ).items.find((item) => {
+    return item.fields.nameUser === creator.name;
+  }) as userInfosEntry | undefined;
+
+  return <AboutUs creator={creator} userInfos={userInfos} />;
 }

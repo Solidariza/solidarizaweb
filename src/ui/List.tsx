@@ -13,12 +13,13 @@ const List = () => {
         const isActive = isSobreNos
           ? pathname.startsWith(sobreNos)
           : pathname === href;
-        const finalHref = isSobreNos ? `${href}/${glawck.url}` : href;
+        const finalHref = isSobreNos ? `${href}${glawck.url}` : href;
         return (
           <Link
             key={finalHref}
             href={finalHref}
             title={`Ir para ${label}`}
+            aria-label={`Ir para ${label}`}
             className={`px-2 py-1 rounded-full transition-all duration-300 ease-in-out ${
               isActive
                 ? `bg-yellow-primary text-blue-quaternary`

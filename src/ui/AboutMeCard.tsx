@@ -1,11 +1,10 @@
-import { creators } from "@/data";
 import { FaUserTie } from "react-icons/fa";
 
 interface AboutMeCardProps {
-  creator: (typeof creators)[number];
+  aboutMe: string | undefined;
 }
 
-const AboutMeCard = ({ creator }: AboutMeCardProps) => {
+const AboutMeCard = ({ aboutMe }: AboutMeCardProps) => {
   return (
     <div
       className="bg-white p-4 rounded-md shadow-md hover:shadow-2xl transition-all duration-300 
@@ -15,7 +14,11 @@ const AboutMeCard = ({ creator }: AboutMeCardProps) => {
         <FaUserTie className="inline text-2xl mb-1 mr-1" />
         SOBRE MIM
       </h3>
-      <p className="text-gray-700">{creator.about}</p>
+      <p className="text-gray-700">
+        {!aboutMe
+          ? "Erro ao puxar dados, verifique sua conexão"
+          : aboutMe || "Sem informações sobre mim."}
+      </p>
     </div>
   );
 };

@@ -59,7 +59,7 @@ export const cards = () => [
   {
     title: "Sobre nós",
     icon: <RiTeamFill size={85} />,
-    href: "SobreNos",
+    href: "SobreNos/GlawckHenrique",
   },
 ];
 

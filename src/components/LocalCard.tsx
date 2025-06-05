@@ -22,9 +22,14 @@ export const LocalCard = ({
     compartilhada em um ambiente de carinho e respeito mútuo.`,
 }: LocalCardProps) => {
   return (
-    <div className="flex flex-col gap-2 p-4 bg-white rounded-xs justify-center items-center">
-      <Image src={src} alt={title} className="w-64 h-64" />
-      <h3 className="font-poppins font-semibold text-xl text-blue-primary">
+    <div
+      className="flex flex-col w-full h-full gap-2 p-4 bg-white rounded-xs justify-between items-center
+      shadow-md hover:shadow-2xl"
+    >
+      <div className="min-w-60 min-h-60 relative">
+        <Image fill src={src} alt={title} />
+      </div>
+      <h3 className="font-poppins font-semibold text-xl text-center text-blue-primary">
         {title}
       </h3>
       <h4 className="mx-6 h-auto text-xl text-justify font-lato">

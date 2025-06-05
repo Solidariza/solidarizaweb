@@ -1,6 +1,6 @@
 "use client";
 import { clientContentful } from "@/lib";
-import { ReceitaFields } from "@/types";
+import { fields } from "@/types";
 import { errorWithMessage } from "@/utils";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -11,20 +11,20 @@ export default function PaginaReceitas() {
   const [categoriaSelecionada, setCategoriaSelecionada] = useState<
     string | null
   >(null);
-  const [receitas, setReceitas] = useState<ReceitaFields[]>([]);
+  const [receitas, setReceitas] = useState<fields[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchReceitas = async () => {
       try {
-        const response = await clientContentful.getEntries<ReceitaFields>({
+        const response = await clientContentful.getEntries<fields>({
           content_type: "receitas",
           include: 1,
         });
 
         if (response.items) {
-          setReceitas(response.items as unknown as ReceitaFields[]);
+          setReceitas(response.items as unknown as fields[]);
         } else {
           setReceitas([]);
         }

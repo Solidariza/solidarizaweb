@@ -1,1 +1,6 @@
-export type { ReceitaFields } from "@/types/ReceitaFields";
+export type {
+  fields,
+  informationsSee,
+  userInfosEntry,
+  userInfosFields,
+} from "@/types/fields";

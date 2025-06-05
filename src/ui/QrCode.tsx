@@ -20,8 +20,16 @@ const QrCode: React.FC<QrCodeProps> = ({
       height: 300,
       type: "svg",
       data: qrUrl,
+      cornersSquareOptions: {
+        type: "rounded",
+        color: "#000050",
+      },
+      cornersDotOptions: {
+        type: "rounded",
+        color: "#110970",
+      },
       dotsOptions: {
-        color: "#272343",
+        color: "#231390",
         type: "rounded",
       },
       image: imgUrl,

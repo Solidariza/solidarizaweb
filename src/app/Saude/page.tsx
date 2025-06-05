@@ -85,12 +85,12 @@ export default function Saude() {
   }
 
   return (
-    <div className="py-10 px-5 min-h-screen mt-22">
+    <div className="px-5 min-h-screen mt-24">
       <h1 className="text-3xl font-bold text-center text-[#272343] mb-10 font-prata">
         Dicas de Saúde para Idosos
       </h1>
 
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
+      <div className="grid w-full h-full sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {dicas.map((dica, index) => (
           <DicaCard
             key={index}

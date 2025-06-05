@@ -1,12 +1,6 @@
 import { CopyRight, NavBar } from "@/components";
-import {
-  creators,
-  fabio,
-  glawck,
-  mateusAugusto,
-  mateusCristiano,
-  ryan,
-} from "@/data";
+import { fabio, glawck, mateusAugusto, mateusCristiano, ryan } from "@/data";
+import { clientContentful } from "@/lib";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
@@ -44,88 +38,123 @@ const description = `Site para entreterimento e informações básicas sobre div
   com foco e assesibilidade para pessoas mais velhas. Venha conhecer nosso site, não custa nada e são apenas alguns
     minutinhos!!!`;
 
-const authors = [
-  { name: ryan.name, url: ryan.insta },
-  { name: fabio.name, url: fabio.insta },
-  { name: glawck.name, url: glawck.insta },
-  { name: mateusAugusto.name, url: mateusAugusto.insta },
-  { name: mateusCristiano.name, url: mateusCristiano.insta },
-];
-
-export const metadata: Metadata = {
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+export const generateMetadata = async (): Promise<Metadata> => {
+  const response = await clientContentful.getEntries({
+    content_type: "sobreNs",
+  });
+  const emails = response.items.map((item) => item.fields.emailUser);
+  const phones = response.items.map((item) => item.fields.phoneUser);
+  const getInstaByName = (name: string) => {
+    const item = response.items.find((item) => item.fields.nameUser === name);
+    return item?.fields.instaUser;
+  };
+  return {
+    robots: {
       index: true,
       follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+      },
     },
-  },
-  appleWebApp: {
-    title: title,
-    capable: true,
-    startupImage: "./favicon.ico",
-    statusBarStyle: "black-translucent",
-  },
-  twitter: {
+    appleWebApp: {
+      title: title,
+      capable: true,
+      startupImage: "./favicon.ico",
+      statusBarStyle: "black-translucent",
+    },
+    twitter: {
+      title: title,
+      creator: team,
+      description: description,
+      card: "summary_large_image",
+    },
+    openGraph: {
+      title: title,
+      type: "website",
+      locale: "pt-BR",
+      siteName: siteName,
+      determiner: "auto",
+      countryName: "Brasil",
+      description: description,
+      phoneNumbers: phones as string[] | "+55 (43) 9 9828-0078",
+      emails: emails as string[] | "solidarizaenterprise@gmail.com",
+    },
+    keywords: [
+      "HTML",
+      "React",
+      "NextJS",
+      "Prisma",
+      "Modern",
+      "Idosos",
+      "WebSite",
+      "Pessoas",
+      "Peoples",
+      "Elderly",
+      "Playground",
+      "TypeScript",
+      "ContentFul",
+      "JavaScript",
+      "Technology",
+      "Tecnologia",
+      "TailwindCSS",
+      "React Icons",
+      "Fábio Ghizoni",
+      "QRCodeStyling",
+      "All Brownsers",
+      "Glack Henrique",
+      "Pessoas idosas",
+      "Modern WebSite",
+      "Mateus Augusto",
+      "Vercel Analytics",
+      "Mateus Cristiano",
+      "Vercel Speed Insights",
+    ],
+    authors: [
+      { name: siteName, url: "https://www.instagram.com/solidariza_hub" },
+      {
+        name: mateusAugusto.name,
+        url: getInstaByName(mateusAugusto.name) as
+          | string
+          | "https://www.instagram.com/solidariza_hub",
+      },
+      {
+        name: mateusCristiano.name,
+        url: getInstaByName(mateusCristiano.name) as
+          | string
+          | "https://www.instagram.com/solidariza_hub",
+      },
+      {
+        name: ryan.name,
+        url: getInstaByName(ryan.name) as
+          | string
+          | "https://www.instagram.com/solidariza_hub",
+      },
+      {
+        name: fabio.name,
+        url: getInstaByName(fabio.name) as
+          | string
+          | "https://www.instagram.com/solidariza_hub",
+      },
+      {
+        name: glawck.name,
+        url: getInstaByName(glawck.name) as
+          | string
+          | "https://www.instagram.com/solidariza_hub",
+      },
+    ],
     title: title,
     creator: team,
+    publisher: team,
+    category: "website",
+    generator: "Next.JS",
     description: description,
-    card: "summary_large_image",
-  },
-  openGraph: {
-    title: title,
-    type: "website",
-    locale: "pt-BR",
-    siteName: siteName,
-    determiner: "auto",
-    countryName: "Brasil",
-    description: description,
-    emails: creators.map((creator) => creator.email),
-    phoneNumbers: creators.map((creator) => creator.phone),
-  },
-  keywords: [
-    "HTML",
-    "React",
-    "NextJS",
-    "Prisma",
-    "Modern",
-    "Idosos",
-    "WebSite",
-    "Pessoas",
-    "Peoples",
-    "Elderly",
-    "Playground",
-    "TypeScript",
-    "ContentFul",
-    "JavaScript",
-    "Technology",
-    "Tecnologia",
-    "TailwindCSS",
-    "React Icons",
-    "Fábio Ghizoni",
-    "QRCodeStyling",
-    "All Brownsers",
-    "Glack Henrique",
-    "Pessoas idosas",
-    "Modern WebSite",
-    "Mateus Augusto",
-    "Vercel Analytics",
-    "Mateus Cristiano",
-    "Vercel Speed Insights",
-  ],
-  title: title,
-  creator: team,
-  publisher: team,
-  authors: authors,
-  category: "website",
-  generator: "Next.JS",
-  description: description,
-  classification: "website",
-  applicationName: "Solidariza",
-  referrer: "origin-when-cross-origin",
-  abstract: `Site desenvolvido com propósito a auxiliar idosos e quaisquer tipo de pessoas a se entreterem e ir em busca 
+    classification: "website",
+    applicationName: "Solidariza",
+    referrer: "origin-when-cross-origin",
+    abstract: `Site desenvolvido com propósito a auxiliar idosos e quaisquer tipo de pessoas a se entreterem e ir em busca 
     de conhecimento e informação.`,
+  };
 };
 
 export default function RootLayout({

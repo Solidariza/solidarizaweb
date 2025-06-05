@@ -1,12 +1,11 @@
-import { creators } from "@/data";
 import { MdWork } from "react-icons/md";
 
 interface ProfessionalExperienceCardProps {
-  creator: (typeof creators)[number];
+  experiences?: string[] | undefined;
 }
 
 const ProfessionalExperienceCard = ({
-  creator,
+  experiences,
 }: ProfessionalExperienceCardProps) => {
   return (
     <div
@@ -17,11 +16,17 @@ const ProfessionalExperienceCard = ({
         <MdWork className="inline text-3xl mb-1 -mt-1" /> EXPERIÊNCIA
         PROFISSIONAL
       </h3>
-      <ul className="list-disc list-inside space-y-1 text-lg text-blue-primary">
-        {creator.experience?.map((experience, index) => (
-          <li key={index}>{experience}</li>
-        ))}
-      </ul>
+      {!experiences ? (
+        <h3 className="w-full h-full text-2xl text-center font-lato text-blue-primary">
+          Erro ao puxar dados, verifique sua conexão
+        </h3>
+      ) : (
+        <ul className="list-disc list-inside space-y-1 text-lg text-blue-primary">
+          {experiences?.map((experience, index) => (
+            <li key={index}>{experience}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
