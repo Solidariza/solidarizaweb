@@ -1,6 +1,8 @@
 export type {
+  AssetFields,
   fields,
-  informationsSee,
+  partnership,
+  partnershipFields,
   userInfosEntry,
   userInfosFields,
 } from "@/types/fields";

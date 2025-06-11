@@ -63,9 +63,9 @@ export default function Jogos() {
             >
               <Link
                 href={link}
-                className="w-full h-full"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="w-full h-full"
               >
                 {imageUrl && (
                   <div className="relative w-full h-48 overflow-hidden rounded-t-lg">

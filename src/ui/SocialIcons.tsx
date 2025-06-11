@@ -1,7 +1,16 @@
 import { socialLinks } from "@/data";
+import { HTMLAttributes } from "react";
 
-const SocialIcons = () => (
-  <div className={`flex gap-2 text-white`}>
+interface SocialIconsProps extends HTMLAttributes<HTMLDivElement> {
+  className?: string;
+  customStyle?: boolean;
+}
+const SocialIcons = ({
+  className,
+  customStyle,
+  ...props
+}: SocialIconsProps) => (
+  <div className={`flex h-fit gap-2 text-white ${className}`} {...props}>
     {socialLinks.map(({ href, label, icon: Icon }) => (
       <a
         key={label}
@@ -10,9 +19,17 @@ const SocialIcons = () => (
         target="_blank"
         aria-label={label}
         rel="noopener noreferrer"
-        className="group transition-all duration-400 ease-in-out hover:bg-yellow-primary p-2 rounded-full"
+        className={`group transition-all duration-400 ease-in-out p-2 rounded-full ${
+          customStyle ? `hover:bg-blue-quaternary` : `hover:bg-yellow-primary`
+        }`}
       >
-        <Icon className="w-6 h-6 group-hover:text-blue-quaternary transition-all duration-400 ease-in-out" />
+        <Icon
+          className={`w-6 h-6  transition-all duration-400 ease-in-out ${
+            customStyle
+              ? `group-hover:text-white`
+              : `group-hover:text-blue-quaternary`
+          }`}
+        />
       </a>
     ))}
   </div>

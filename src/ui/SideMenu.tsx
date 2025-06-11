@@ -1,47 +1,52 @@
-import Link from "next/link";
-import { IoIosClose } from "react-icons/io";
+"use client";
+import { useEffect, useRef } from "react";
+import IconMenu from "./IconMenu";
+import List from "./List";
+import Overlay from "./Overlay";
+import SocialIcons from "./SocialIcons";
 
 interface SideMenuProps {
   isOpen: boolean;
   closeMenu: () => void;
+  toggleMenu: () => void;
 }
 
-const SideMenu = ({ isOpen, closeMenu }: SideMenuProps) => (
-  <div
-    className={`fixed top-0 left-0 h-screen w-2/3 bg-blue-secondary text-white transform transition-transform 
-      duration-300 ease-in-out md:hidden shadow-lg ${
-        isOpen ? "translate-x-0" : "-translate-x-full"
-      }`}
-  >
-    <button onClick={closeMenu} className="p-4 cursor-pointer">
-      <IoIosClose size={28} />
-    </button>
-    <ul className="flex flex-col gap-6 p-6 text-lg">
-      <li>
-        <Link
-          href="/quem-somos"
-          className="hover:underline"
-          onClick={closeMenu}
-        >
-          Quem Somos
-        </Link>
-      </li>
-      <li>
-        <Link href="/parcerias" className="hover:underline" onClick={closeMenu}>
-          Parcerias
-        </Link>
-      </li>
-      <li>
-        <Link
-          href="/quero-fazer-parte"
-          className="hover:underline"
-          onClick={closeMenu}
-        >
-          Quero Fazer Parte
-        </Link>
-      </li>
-    </ul>
-  </div>
-);
+const SideMenu = ({ isOpen, closeMenu, toggleMenu }: SideMenuProps) => {
+  const ulRef = useRef<HTMLUListElement>(null);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ulRef.current && !ulRef.current.contains(event.target as Node)) {
+        closeMenu();
+      }
+    };
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.body.style.overflow = "unset";
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, closeMenu]);
+
+  if (isOpen) {
+    return (
+      <ul
+        ref={ulRef}
+        className={`flex flex-col w-fit h-screen fixed inset-0 md:hidden justify-between 
+          bg-yellow-primary z-50`}
+      >
+        <IconMenu isOpen={isOpen} closeMenu={closeMenu} />
+        <List className="mx-1" closeMenu={closeMenu} customStyle />
+        <SocialIcons className="mx-8 z-30 mb-8" customStyle />
+        <Overlay closeMenu={closeMenu} />
+      </ul>
+    );
+  }
+  return <IconMenu isOpen={isOpen} toggleMenu={toggleMenu} />;
+};
 
 export default SideMenu;

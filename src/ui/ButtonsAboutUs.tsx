@@ -12,11 +12,12 @@ const ButtonsAboutUs = () => {
       text-blue-quaternary"
     >
       {creators.map((creator) => {
-        const isActive = pathname.includes(`/SobreNos/${creator.slug}`);
+        const href = `/SobreNos/${creator.slug}`;
+        const isActive = pathname.includes(href);
         return (
           <Link
+            href={href}
             key={creator.url}
-            href={`/SobreNos/${creator.url}`}
             title={`Ir para página de ${getTwoNames(creator.name)}`}
             className={`relative cursor-pointer rounded-md p-1 px-2 text-center transition-all duration-300 ease-in-out
                ${

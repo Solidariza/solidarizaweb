@@ -11,4 +11,3 @@ export { pageLinks } from "./pageLinks";
 export { radioStations } from "./radioStations";
 export { recipes } from "./recipes";
 export { socialLinks } from "./socialLinks";
-export { sponsors } from "./sponsors";

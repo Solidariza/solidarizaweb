@@ -1,5 +1,5 @@
 import { creators } from "@/data";
-import { informationsSee, userInfosEntry, userInfosFields } from "@/types";
+import { userInfosEntry, userInfosFields } from "@/types";
 import {
   AboutMeCard,
   EducationCard,
@@ -14,19 +14,18 @@ interface AboutUsProps {
 }
 
 export const AboutUs = ({ creator, userInfos }: AboutUsProps) => {
-  const aboutMe = userInfos?.fields.aboutMe as string | undefined;
-  const infoSee = userInfos?.fields
-    .informationsSee as unknown as informationsSee;
-  const photoUrl = (userInfos?.fields.photoUser as unknown as userInfosFields)
+  const userInfosFields = userInfos?.fields as unknown as userInfosFields;
+  const aboutMe = userInfosFields.aboutMeDescription as string | undefined;
+  const photoUrl = (userInfosFields.photoUser as unknown as userInfosFields)
     .fields.file.url;
   const photoDescription = (
-    userInfos?.fields.photoUser as unknown as userInfosFields
+    userInfosFields.photoUser as unknown as userInfosFields
   ).fields.description;
   const blurPhotoUrl = (
-    userInfos?.fields.photoBlurUser as unknown as userInfosFields
+    userInfosFields.photoBlurUser as unknown as userInfosFields
   ).fields.file.url;
   const blurPhotoDescription = (
-    userInfos?.fields.photoBlurUser as unknown as userInfosFields
+    userInfosFields.photoBlurUser as unknown as userInfosFields
   ).fields.description;
   return (
     <div className="flex flex-col md:flex-row w-full min-h-screen items-start justify-center gap-6 p-6">
@@ -40,9 +39,17 @@ export const AboutUs = ({ creator, userInfos }: AboutUsProps) => {
       />
       <div className="flex flex-col gap-6 w-full md:w-3/4">
         <AboutMeCard aboutMe={aboutMe} />
-        <EducationCard educations={infoSee.educations} />
-        <ProfessionalExperienceCard experiences={infoSee.experiences} />
-        <SoftwaresCard softwares={infoSee.softwares} />
+        <EducationCard
+          educations={userInfosFields.softwareEducationAndExperience.educations}
+        />
+        <ProfessionalExperienceCard
+          experiences={
+            userInfosFields.softwareEducationAndExperience.experiences
+          }
+        />
+        <SoftwaresCard
+          softwares={userInfosFields.softwareEducationAndExperience.softwares}
+        />
       </div>
     </div>
   );

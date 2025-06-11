@@ -12,5 +12,4 @@ export {
   recipes,
   ryan,
   socialLinks,
-  sponsors,
 } from "@/data/data";

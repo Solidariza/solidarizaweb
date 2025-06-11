@@ -40,7 +40,7 @@ const description = `Site para entreterimento e informações básicas sobre div
 
 export const generateMetadata = async (): Promise<Metadata> => {
   const response = await clientContentful.getEntries({
-    content_type: "sobreNs",
+    content_type: "aboutMe",
   });
   const emails = response.items.map((item) => item.fields.emailUser);
   const phones = response.items.map((item) => item.fields.phoneUser);

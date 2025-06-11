@@ -1,8 +1,8 @@
 export const handleClickChange = (
-  setActiveIndex: React.Dispatch<React.SetStateAction<number>>,
-  direction: "next" | "prev",
   length: number,
-  visibleCards: number
+  visibleCards: number,
+  direction: "next" | "prev",
+  setActiveIndex: React.Dispatch<React.SetStateAction<number>>
 ) => {
   setActiveIndex((currentIndex) => {
     if (direction === "next") {
